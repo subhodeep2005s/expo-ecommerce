@@ -1,10 +1,7 @@
 // Define empty functions
 import cloudinary from "../config/cloudinary.js";
-
-import { Product } from "../models/Product.model.js";
-
-import { Order } from "../models/Order.model.js";
-
+import { Product } from "../models/product.model.js";
+import { Order } from "../models/order.model.js";
 import { User } from "../models/user.model.js";
 
 const createProduct = async (req, res) => {
@@ -73,7 +70,7 @@ const updateProduct = async (req, res) => {
 
     if (name) product.name = name;
     if (description) product.description = description;
-    if (pr !== undefined) product.price = parseFloat(price);
+    if (price !== undefined) product.price = parseFloat(price);
     if (stock !== undefined) product.stock = parseInt(stock);
     if (category) product.category = category;
 
