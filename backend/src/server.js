@@ -6,6 +6,12 @@ import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 
 import { functions, inngest } from "./config/inngest.js";
+// routes for admin panel
+import adminRoutes from "./routes/admin.routes.js";
+
+// routes for user operations
+import userRoutes from "./routes/user.routes.js";
+import { use } from "react";
 
 const app = express();
 
@@ -14,6 +20,9 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/user", userRoutes);
 app.get("/api/health", (req, res) => {
   res.status(200).json("OK");
 });
