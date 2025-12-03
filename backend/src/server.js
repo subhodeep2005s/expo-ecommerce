@@ -11,7 +11,7 @@ import adminRoutes from "./routes/admin.routes.js";
 
 // routes for user operations
 import userRoutes from "./routes/user.routes.js";
-import { use } from "react";
+import orderRoutes from "./routes/order.routes.js";
 
 const app = express();
 
@@ -23,6 +23,7 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/orders", orderRoutes);
 app.get("/api/health", (req, res) => {
   res.status(200).json("OK");
 });
