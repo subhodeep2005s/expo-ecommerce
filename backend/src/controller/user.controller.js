@@ -1,3 +1,5 @@
+import { User } from "../models/user.model";
+
 // File: /c:/Users/sarka/Desktop/expo-ecommerce/backend/src/controller/user.controller.js
 const addAddress = async (req, res) => {
   try {
@@ -11,7 +13,21 @@ const addAddress = async (req, res) => {
       phoneNumber,
       isDefault,
     } = req.body;
+
     const user = req.user;
+    if (
+      !label ||
+      !fullName ||
+      !streetAddress ||
+      !city ||
+      !state ||
+      !zipCode ||
+      !phoneNumber
+    ) {
+      return res
+        .status(400)
+        .json({ message: "All address fields are required" });
+    }
     if (isDefault) {
       user.addresses.forEach((address) => (address.isDefault = false));
     }
@@ -109,7 +125,8 @@ const addToWishlist = async (req, res) => {
 
 const getWishlist = async (req, res) => {
   try {
-    const user = req.user;
+    const user = await User.findById(req.user._id).populate("wishlist");
+
     res.status(200).json({ wishlist: user.wishlist });
   } catch (error) {
     console.log("Error while fetching wishlist");
