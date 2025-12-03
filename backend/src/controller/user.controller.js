@@ -1,4 +1,4 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 
 // File: /c:/Users/sarka/Desktop/expo-ecommerce/backend/src/controller/user.controller.js
 const addAddress = async (req, res) => {
