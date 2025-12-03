@@ -66,18 +66,18 @@ const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, description, price, stock, category } = req.body;
 
-    const product = Product.findById(id);
+    const product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ message: "Product not found." });
     }
 
     if (name) product.name = name;
     if (description) product.description = description;
-    if (price) product.price = parseFloat(price);
-    if (stock) product.stock = parseInt(stock);
+    if (pr !== undefined) product.price = parseFloat(price);
+    if (stock !== undefined) product.stock = parseInt(stock);
     if (category) product.category = category;
 
-    if (req.file.length > 0) {
+    if (req.files && req.files.length > 0) {
       if (req.files.length > 3) {
         return res
           .status(400)
@@ -105,6 +105,7 @@ const getAllOrders = async (req, res) => {
       .populate("user", "name email")
       .populate("orderItems.product")
       .sort({ createdAt: -1 });
+    res.status(200).json({ message: "Orders fetched successfully", orders });
   } catch (error) {
     console.log("error while fetching orders", error);
     return res
@@ -149,7 +150,7 @@ const updateOrderStatus = async (req, res) => {
 const getAllCustomers = async (_, res) => {
   try {
     const customers = await User.find().sort({ createdAt: -1 });
-    if (!customers) {
+    if (customers.length === 0) {
       return res.status(404).json({ message: "No customers found." });
     }
     res
