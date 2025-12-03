@@ -1,7 +1,7 @@
 // Define empty functions
 import cloudinary from "../config/cloudinary.js";
 
-import { Product } from "../models/Product.model.js";
+import { Product } from "../models/product.model.js";
 
 import { Order } from "../models/Order.model.js";
 
