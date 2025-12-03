@@ -39,12 +39,10 @@ export async function addAddress(req, res) {
 
     await user.save();
 
-    res
-      .status(201)
-      .json({
-        message: "Address added successfully",
-        addresses: user.addresses,
-      });
+    res.status(201).json({
+      message: "Address added successfully",
+      addresses: user.addresses,
+    });
   } catch (error) {
     console.error("Error in addAddress controller:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -101,12 +99,10 @@ export async function updateAddress(req, res) {
 
     await user.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Address updated successfully",
-        addresses: user.addresses,
-      });
+    res.status(200).json({
+      message: "Address updated successfully",
+      addresses: user.addresses,
+    });
   } catch (error) {
     console.error("Error in updateAddress controller:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -121,12 +117,10 @@ export async function deleteAddress(req, res) {
     user.addresses.pull(addressId);
     await user.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Address deleted successfully",
-        addresses: user.addresses,
-      });
+    res.status(200).json({
+      message: "Address deleted successfully",
+      addresses: user.addresses,
+    });
   } catch (error) {
     console.error("Error in deleteAddress controller:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -168,12 +162,10 @@ export async function removeFromWishlist(req, res) {
     user.wishlist.pull(productId);
     await user.save();
 
-    res
-      .status(200)
-      .json({
-        message: "Product removed from wishlist",
-        wishlist: user.wishlist,
-      });
+    res.status(200).json({
+      message: "Product removed from wishlist",
+      wishlist: user.wishlist,
+    });
   } catch (error) {
     console.error("Error in removeFromWishlist controller:", error);
     res.status(500).json({ error: "Internal server error" });
