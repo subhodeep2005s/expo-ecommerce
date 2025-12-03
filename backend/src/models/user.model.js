@@ -25,7 +25,7 @@ const addressSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  PhoneNumber: {
+  phoneNumber: {
     type: String,
     required: true,
   },
@@ -52,8 +52,8 @@ const userSchema = new mongoose.Schema(
     },
     clerkId: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
     addresses: [addressSchema],
     wishlist: [
