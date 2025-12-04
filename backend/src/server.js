@@ -14,11 +14,15 @@ import userRoutes from "./routes/user.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 import productRoutes from "./routes/products.route.js";
+import cartRoutes from "./routes/cart.routes.js";
+import cors from "cors";
 const app = express();
 
 const __dirname = path.resolve();
 app.use(express.json());
 app.use(clerkMiddleware());
+
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
@@ -27,6 +31,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 app.get("/api/health", (req, res) => {
   res.status(200).json("OK");
