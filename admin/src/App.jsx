@@ -5,6 +5,7 @@ import {
   useAuth,
   UserButton,
 } from "@clerk/clerk-react";
+import { ToastContainer } from "react-toastify";
 import { Navigate, Route, Routes } from "react-router";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -19,22 +20,25 @@ export default function App() {
   if (!isLoaded) return <PageLoader />;
 
   return (
-    <Routes>
-      <Route
-        path="/login"
-        element={isSignedIn ? <Navigate to="/dashboard" /> : <LoginPage />}
-      />
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route
+          path="/login"
+          element={isSignedIn ? <Navigate to="/dashboard" /> : <LoginPage />}
+        />
 
-      <Route
-        path="/"
-        element={isSignedIn ? <DashboardLayout /> : <Navigate to="/login" />}
-      >
-        <Route index element={<Navigate to="/dashboard" />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="products" element={<ProductsPage />} />
-        <Route path="orders" element={<OrdersPage />} />
-        <Route path="customers" element={<CustomersPage />} />
-      </Route>
-    </Routes>
+        <Route
+          path="/"
+          element={isSignedIn ? <DashboardLayout /> : <Navigate to="/login" />}
+        >
+          <Route index element={<Navigate to="/dashboard" />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="orders" element={<OrdersPage />} />
+          <Route path="customers" element={<CustomersPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
